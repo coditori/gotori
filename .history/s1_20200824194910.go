@@ -26,10 +26,10 @@ func main() {
 	  // it depends on: what we have on production
 	// 2- arch
 	  // java: JVM (isolated), java 11 to "just" compile to linux x86 
-	  // golang: there is no no VM > you need to compile your code to x86 linux x86 windows
+	  // golang: there is VM > compile your code to x86 linux x86 windows
 	// paradigms
 	  // Java: OOP OOD
-	  // Go: Not OOP, but Interfaces, Structs (something like classes) 
+	  // Go: Not OOP, Interfaces, Structs (something like classes) 
 	// compare Clean Code (community stuff)
 	  // java: cleaner
 	  // golang: chain of conditional statements (passing errors)
