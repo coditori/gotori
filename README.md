@@ -19,5 +19,9 @@ My Golang Course
 <td><a href="/s2/s2.go">Session 2</a></td>
 <td>1- Golang IDEs. 2- Functions and Errors. 3- Arrays</td>
 </tr>
+<tr>
+<td><a href="/s2/s3.go">Session 3</a></td>
+<td>1- Passing Functions as arguments. 2- Slices. 3- Maps. 4- Range</td>
+</tr>
 </tbody>
 </table>
