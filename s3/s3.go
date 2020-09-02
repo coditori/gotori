@@ -12,17 +12,17 @@ func main() {
 	// resources
 	// https://gobyexample.com
 
-	// slices: arrays with their size is not fixed
-	// we use make to create one like: arr := make([]string, 3)
-	// we need something fixed like weekdays: array
+	// slices: arrays with flexible size
+	// we use "make" to create one like: arr := make([]string, 3)
+	// when we need something fixed like weekdays: use array
+	// when there is an need for change like a list of people: use slice
 
-	// maps, dictionaries
-	// we use make to create one like: m := make(map[string]int)
-	// they are pre sorted
+	// maps or dictionaries: they can have non-integer indexes
+	// we use "make" to create one like: m := make(map[string]int)
+	// they are pre sorted baed on key content
+	// sample: [day:2 friday:4 monday:0 z:5]
 
 	// range: iterate over collections (arrays, slices, maps, ...)
-
-	// map: they can have non-integer indexes
 
 	// var arr [12]months
 	// arr := make([]string, 3)
