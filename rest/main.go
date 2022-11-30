@@ -48,6 +48,8 @@ func main() {
 		}
 	})
 
+	// router.Group("/videos")
+
 	router.Run("localhost:8080")
 }
 
