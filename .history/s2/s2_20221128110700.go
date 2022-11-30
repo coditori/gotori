@@ -38,13 +38,13 @@ func main() {
 	}
 	fmt.Println(a)
 
-	// // default value for string array item is ""
-	var arr [7]string
-	arr[0] = "Monday"
-	arr[6] = "Sunday"
-	arr[4] = "Friday"
-	fmt.Println(arr[2])
-	fmt.Println(arr)
+	// // default value for string is ""
+	// var arr [7]string
+	// arr[0] = "Monday"
+	// arr[6] = "Sunday"
+	// arr[4] = "Friday"
+	// // fmt.Println(arr[2])
+	// fmt.Println(arr)
 
 	// default value for int is 0
 	var intArr [10]int
@@ -65,7 +65,7 @@ func sum(a int, b int) (int, error) {
 		return 0, errors.New("arguments should not be negative")
 	}
 	// error is an interface: interfaces in Go can be nil
-	return a + b, nil
+	return a + b
 }
 
 func getName(name string) string {

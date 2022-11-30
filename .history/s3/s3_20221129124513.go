@@ -57,9 +57,9 @@ func main() {
 	m["z"] = 5
 	fmt.Println("my dict content", m)
 
-	delete(m, "friday")
+	// delete(m, "friday")
 
-	fmt.Println("my dict after delete", m)
+	// fmt.Println("my dict after delete", m)
 
 	// numberArr := []int{3, 10, 4, 20, 5, 1}
 	// for i := 0; i < len(numberArr); i++ {

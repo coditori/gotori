@@ -22,44 +22,44 @@ func main() {
 	// they are pre sorted based on key content
 	// sample: [day:2 friday:4 monday:0 z:5]
 
-	// m := make(map[string]string)
-	// m["name"] = "Ario"
-	// m["family"] = "Afrashteh"
-	// m["city"] = "Den Haag"
-	// fmt.Println(m)
+	m := make(map[string]string)
+	m["name"] = "Ario"
+	m["family"] = "Afrashteh"
+	m["city"] = "Den Haag"
+	fmt.Println(m)
 
 	// range: iterate over collections (arrays, slices, maps, ...)
 
-	// var arr [12]string
-	arr := make([]string, 3)
-	arr[0] = "Monday"
+	// var arr [12]months
+	// arr := make([]string, 3)
+	// arr[0] = "Monday"
 	// // 1 ""
 	// // 2 ""
 
 	// // arr[4] = "something"
 	// fmt.Println("my slice len before append is", len(arr))
 
-	arr = append(arr, "something")
+	// arr = append(arr, "something")
 
 	// // fmt.Printf("this is my slice ")
-	fmt.Println("slice", arr)
-	fmt.Println("my slice len AFTER append is", len(arr))
+	// fmt.Println("slice", arr)
+	// fmt.Println("my slice len AFTER append is", len(arr))
 
 	// arr := make([]string, 3)
 	// res := fillArray(arr)
 	// fmt.Println("my arr is", res)
 	// fmt.Println("res array len is", len(res))
 
-	m := make(map[string]int)
-	m["monday"] = 0
-	m["friday"] = 4
-	m["a day"] = 2
-	m["z"] = 5
-	fmt.Println("my dict content", m)
+	// m := make(map[string]int)
+	// m["monday"] = 0
+	// m["friday"] = 4
+	// m["a day"] = 2
+	// m["z"] = 5
+	// fmt.Println("my dict content", m)
 
-	delete(m, "friday")
+	// delete(m, "friday")
 
-	fmt.Println("my dict after delete", m)
+	// fmt.Println("my dict after delete", m)
 
 	// numberArr := []int{3, 10, 4, 20, 5, 1}
 	// for i := 0; i < len(numberArr); i++ {

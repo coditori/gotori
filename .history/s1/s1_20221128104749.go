@@ -35,22 +35,21 @@ func main() {
 	// golang: chain of conditional statements (passing errors)
 
 	// varriables
-	name := "Massoud"
-	var family string = "Afrashteh" // java: string family
-	fmt.Println(name, family)
-	fmt.Printf("name: %s, family: %s", name, family)
+	// name := "Massoud"
+	// var family string = "Afrashteh" // java: string family
+	// fmt.Println(name, family)
+	// fmt.Printf("name: %s, family: %s", name, family)
 
 	// constants
-	p := 3.14
+	// p := 3.14
 	// const p float64 = 3.14
-	fmt.Println("p", p)
+	// fmt.Println("p", p)
 	// fmt.Println("type of p", reflect.ValueOf(p).Kind()) // python: type(p)
 
 	var lessThanTen int = 5
 	fmt.Println("lessThanTen", lessThanTen)
 
 	checkTheMax := 6
-	fmt.Printf("Type of checkTheMax %T", checkTheMax)
 	fmt.Println(checkTheMax, "type", reflect.ValueOf(checkTheMax).Kind())
 
 	sum := lessThanTen + checkTheMax
@@ -74,14 +73,14 @@ func main() {
 		fmt.Println("num is 10")
 	}
 
-	// num := 23
+	num := 23
 	// for
 	// java: for (int u = 0; u < 10; u++ {}
-	// for num < 23 {
-	// 	fmt.Println("num is less than 23")
-	// }
+	for num < 23 {
+		fmt.Println("num is less than 23")
+	}
 
-	// for u := 0; u < 10; u++ {
-	// 	fmt.Println("num is less than 23")
-	// }
+	for u := 0; u < 10; u++ {
+		fmt.Println("num is less than 23")
+	}
 }

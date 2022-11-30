@@ -38,7 +38,7 @@ func main() {
 	}
 	fmt.Println(a)
 
-	// // default value for string array item is ""
+	// // default value for string is ""
 	var arr [7]string
 	arr[0] = "Monday"
 	arr[6] = "Sunday"

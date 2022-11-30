@@ -38,12 +38,12 @@ func main() {
 	}
 	fmt.Println(a)
 
-	// // default value for string array item is ""
+	// // default value for string is ""
 	var arr [7]string
 	arr[0] = "Monday"
 	arr[6] = "Sunday"
 	arr[4] = "Friday"
-	fmt.Println(arr[2])
+	// fmt.Println(arr[2])
 	fmt.Println(arr)
 
 	// default value for int is 0
