@@ -9,7 +9,7 @@ type Person struct {
 
 type Video struct {
 	// xml:"title" form:"title" validate:"email" binding:"required"
-	Title       string `json:"title" binding:"min=2,max=10"`
+	Title       string `json:"title" binding:"min=2,max=20" validate:"is-cool"`
 	Description string `json:"description" binding:"max=20"`
 	URL         string `json:"url" binding:"required,url"`
 	Author      Person `json:"author" binding:"required"`
