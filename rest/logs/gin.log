@@ -3,13 +3,11 @@
  - using code:	gin.SetMode(gin.ReleaseMode)
 
 [GIN-debug] GET    /test                     --> main.main.func1 (5 handlers)
-[GIN-debug] GET    /videos                   --> main.main.func2 (5 handlers)
-[GIN-debug] POST   /videos                   --> main.main.func3 (5 handlers)
+[GIN-debug] GET    /api/videos               --> main.main.func2 (5 handlers)
+[GIN-debug] POST   /api/videos               --> main.main.func3 (5 handlers)
 [GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
 Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
 [GIN-debug] Listening and serving HTTP on localhost:8080
-127.0.0.1 - [30 Nov 22 14:12 CET] /videos POST 400 385.728µs
-127.0.0.1 - [30 Nov 22 14:12 CET] /videos POST 400 139.347µs
-127.0.0.1 - [30 Nov 22 14:13 CET] /videos POST 400 181.966µs
-127.0.0.1 - [30 Nov 22 14:13 CET] /videos POST 400 133.897µs
-127.0.0.1 - [30 Nov 22 14:13 CET] /videos POST 200 190.447µs
+127.0.0.1 - [08 Dec 22 14:50 CET] /api/test GET 401 4.196µs
+127.0.0.1 - [08 Dec 22 14:50 CET] /api/videos GET 200 135.995µs
+127.0.0.1 - [08 Dec 22 14:50 CET] /api/videos POST 200 238.499µs
