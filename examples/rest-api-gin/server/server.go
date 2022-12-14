@@ -14,10 +14,11 @@ var (
 	videoController controller.VideoController = controller.New(videoService)
 )
 
-func mains() {
+func Init() {
+	// config := config.GetConfig()
 	saveLogToFile()
 	router := NewRouter()
-	port := applicationPort()
+	port := getApplicationPort()
 	router.Run(":" + port)
 }
 
@@ -26,10 +27,10 @@ func saveLogToFile() {
 	gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
 }
 
-func applicationPort() string {
+func getApplicationPort() string {
 	port := os.Getenv("APP_PORT")
 	if port == "" {
-		port = "5000"
+		port = "8000"
 	}
 	return port
 }

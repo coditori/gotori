@@ -2,13 +2,11 @@ package server
 
 import (
 	"log"
-	"net/http"
 	"rest/middlewares"
 	"rest/models"
 
-	jwt "github.com/appleboy/gin-jwt"
+	jwt "github.com/appleboy/gin-jwt/v2"
 	"github.com/gin-gonic/gin"
-	gindump "github.com/tpkeeper/gin-dump"
 )
 
 var identityKey = "id"
@@ -16,7 +14,7 @@ var identityKey = "id"
 func NewRouter() *gin.Engine {
 	router := gin.New()
 
-	router.Use(gin.Recovery(), middlewares.Logger(), middlewares.BasicAuth(), gindump.Dump())
+	// router.Use(gin.Recovery(), middlewares.Logger(), gindump.Dump())
 
 	router.GET("/ping", func(ctx *gin.Context) {
 		ctx.JSON(200, gin.H{
@@ -25,6 +23,7 @@ func NewRouter() *gin.Engine {
 	})
 
 	authMiddleware := middlewares.JwtAuth()
+
 	router.POST("/login", authMiddleware.LoginHandler)
 
 	router.NoRoute(authMiddleware.MiddlewareFunc(), func(c *gin.Context) {
@@ -39,22 +38,22 @@ func NewRouter() *gin.Engine {
 		auth.GET("/hello", helloHandler)
 	}
 
-	apiRoutes := router.Group("/api", middlewares.BasicAuth())
-	{
-		apiRoutes.GET("/videos", func(ctx *gin.Context) {
-			ctx.JSON(200, videoController.FindAll())
-		})
-		apiRoutes.POST("/videos", func(ctx *gin.Context) {
-			video, err := videoController.Save(ctx)
-			if err != nil {
-				ctx.JSON(http.StatusBadRequest, gin.H{
-					"error": err.Error(),
-				})
-			} else {
-				ctx.JSON(http.StatusOK, video)
-			}
-		})
-	}
+	// apiRoutes := router.Group("/api", middlewares.BasicAuth())
+	// {
+	// 	apiRoutes.GET("/videos", func(ctx *gin.Context) {
+	// 		ctx.JSON(200, videoController.FindAll())
+	// 	})
+	// 	apiRoutes.POST("/videos", func(ctx *gin.Context) {
+	// 		video, err := videoController.Save(ctx)
+	// 		if err != nil {
+	// 			ctx.JSON(http.StatusBadRequest, gin.H{
+	// 				"error": err.Error(),
+	// 			})
+	// 		} else {
+	// 			ctx.JSON(http.StatusOK, video)
+	// 		}
+	// 	})
+	// }
 
 	return router
 }
