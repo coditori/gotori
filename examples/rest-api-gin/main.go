@@ -15,7 +15,5 @@ func main() {
 	}
 	flag.Parse()
 	println("environment is " + *environment)
-	// config.Init(*environment)
-	// db.Init()
 	server.Init()
 }
