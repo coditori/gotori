@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"net/http"
 	"rest/models"
 	"rest/service"
 	"rest/validators"
@@ -11,8 +12,8 @@ import (
 
 // controller interface
 type VideoController interface {
-	Save(ctx *gin.Context) (models.Video, error)
-	FindAll() []models.Video
+	Save(ctx *gin.Context)
+	FindAll(ctx *gin.Context)
 }
 
 // contorller class
@@ -32,20 +33,17 @@ func New(service service.VideoService) VideoController {
 	}
 }
 
-func (controller *videoController) Save(ctx *gin.Context) (models.Video, error) {
+func (controller *videoController) Save(ctx *gin.Context) {
 	var video models.Video
-	err := ctx.ShouldBindJSON(&video)
-	if err != nil {
-		return video, err
-	}
-	err = validate.Struct(video)
-	if err != nil {
-		return video, err
+	if ctx.ShouldBindJSON(&video) != nil && validate.Struct(video) != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"error": "Could not bind or validate data!",
+		})
 	}
 	controller.service.Save(video)
-	return video, nil
+	ctx.JSON(http.StatusOK, video)
 }
 
-func (controller *videoController) FindAll() []models.Video {
-	return controller.service.FindAll()
+func (controller *videoController) FindAll(ctx *gin.Context) {
+	ctx.JSON(200, controller.service.FindAll())
 }

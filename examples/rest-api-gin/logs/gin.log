@@ -6,6 +6,8 @@
 [GIN-debug] POST   /login                    --> github.com/appleboy/gin-jwt/v2.(*GinJWTMiddleware).LoginHandler-fm (1 handlers)
 [GIN-debug] GET    /auth/refresh_token       --> github.com/appleboy/gin-jwt/v2.(*GinJWTMiddleware).RefreshHandler-fm (2 handlers)
 [GIN-debug] GET    /auth/hello               --> rest/server.helloHandler (2 handlers)
+[GIN-debug] GET    /auth/videos              --> rest/server.NewRouter.func3 (2 handlers)
+[GIN-debug] POST   /auth/videos              --> rest/controller.VideoController.Save-fm (2 handlers)
 [GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
 Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
 [GIN-debug] Listening and serving HTTP on :8000

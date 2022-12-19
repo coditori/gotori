@@ -36,24 +36,9 @@ func NewRouter() *gin.Engine {
 	{
 		auth.GET("/refresh_token", authMiddleware.RefreshHandler)
 		auth.GET("/hello", helloHandler)
+		auth.GET("/videos", videoController.FindAll)
+		auth.POST("/videos", videoController.Save)
 	}
-
-	// apiRoutes := router.Group("/api", middlewares.BasicAuth())
-	// {
-	// 	apiRoutes.GET("/videos", func(ctx *gin.Context) {
-	// 		ctx.JSON(200, videoController.FindAll())
-	// 	})
-	// 	apiRoutes.POST("/videos", func(ctx *gin.Context) {
-	// 		video, err := videoController.Save(ctx)
-	// 		if err != nil {
-	// 			ctx.JSON(http.StatusBadRequest, gin.H{
-	// 				"error": err.Error(),
-	// 			})
-	// 		} else {
-	// 			ctx.JSON(http.StatusOK, video)
-	// 		}
-	// 	})
-	// }
 
 	return router
 }

@@ -4,21 +4,27 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"strings"
 )
 
 func main() {
 
-	url := "http://localhost:8080/videos"
-	method := "GET"
+	url := "http://localhost:8000/login"
+	method := "POST"
+
+	payload := strings.NewReader(`{
+    "username": "admin",
+    "password": "admin"
+}`)
 
 	client := &http.Client{}
-	req, err := http.NewRequest(method, url, nil)
+	req, err := http.NewRequest(method, url, payload)
 
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
-	req.Header.Add("Authorization", "Basic cGFyYWdtYXRpYzpyZXZpZXdzUGFzc3dvcmQxMjMxMjIz")
+	req.Header.Add("Content-Type", "application/json")
 
 	res, err := client.Do(req)
 	if err != nil {
