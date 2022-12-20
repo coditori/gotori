@@ -37,7 +37,7 @@ func New(service service.VideoService) VideoController {
 	}
 }
 
-func validateRequestAndShowErrorIfCouldNotValidate(ctx *gin.Context, video models.Video) {
+func validateRequestAndShowErrorIfCouldNotValidate(ctx *gin.Context, video *models.Video) {
 	if ctx.ShouldBindJSON(&video) != nil && validate.Struct(video) != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{
 			"error": "Could not bind or validate data!",
@@ -47,15 +47,15 @@ func validateRequestAndShowErrorIfCouldNotValidate(ctx *gin.Context, video model
 
 func (controller *videoController) Save(ctx *gin.Context) {
 	var video models.Video
-	validateRequestAndShowErrorIfCouldNotValidate(ctx, video)
-
+	validateRequestAndShowErrorIfCouldNotValidate(ctx, &video)
+	log.Printf("Video is %s /n", video)
 	controller.service.Save(video)
 	ctx.JSON(http.StatusOK, video)
 }
 
 func (controller *videoController) Update(ctx *gin.Context) {
 	var video models.Video
-	validateRequestAndShowErrorIfCouldNotValidate(ctx, video)
+	validateRequestAndShowErrorIfCouldNotValidate(ctx, &video)
 
 	id, err := strconv.ParseUint(ctx.Params.ByName("id"), 0, 0)
 	if err != nil {
@@ -67,7 +67,7 @@ func (controller *videoController) Update(ctx *gin.Context) {
 
 func (controller *videoController) Delete(ctx *gin.Context) {
 	var video models.Video
-	validateRequestAndShowErrorIfCouldNotValidate(ctx, video)
+	validateRequestAndShowErrorIfCouldNotValidate(ctx, &video)
 
 	id, err := strconv.ParseUint(ctx.Params.ByName("id"), 0, 0)
 	if err != nil {
