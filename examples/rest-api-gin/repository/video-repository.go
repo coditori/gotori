@@ -52,6 +52,6 @@ func (db *database) Delete(video models.Video) {
 
 func (db *database) FindAll() []models.Video {
 	var videos []models.Video
-	db.connection.Find(&videos)
+	db.connection.Set("gorm:auto_preload", true).Find(&videos)
 	return videos
 }
