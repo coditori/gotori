@@ -67,8 +67,6 @@ func (controller *videoController) Update(ctx *gin.Context) {
 
 func (controller *videoController) Delete(ctx *gin.Context) {
 	var video models.Video
-	validateRequestAndShowErrorIfCouldNotValidate(ctx, &video)
-
 	id, err := strconv.ParseUint(ctx.Params.ByName("id"), 0, 0)
 	if err != nil {
 		log.Println("Coud not parse param!")

@@ -7,6 +7,8 @@
 [GIN-debug] GET    /auth/refresh_token       --> github.com/appleboy/gin-jwt/v2.(*GinJWTMiddleware).RefreshHandler-fm (2 handlers)
 [GIN-debug] GET    /auth/hello               --> rest/server.helloHandler (2 handlers)
 [GIN-debug] GET    /auth/videos              --> rest/controller.VideoController.FindAll-fm (2 handlers)
+[GIN-debug] PUT    /auth/videos/:id          --> rest/controller.VideoController.Update-fm (2 handlers)
+[GIN-debug] DELETE /auth/videos/:id          --> rest/controller.VideoController.Delete-fm (2 handlers)
 [GIN-debug] POST   /auth/videos              --> rest/controller.VideoController.Save-fm (2 handlers)
 [GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
 Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.

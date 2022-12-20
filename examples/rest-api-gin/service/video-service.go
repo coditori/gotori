@@ -32,7 +32,7 @@ func (service *videoService) Update(video models.Video) {
 }
 
 func (service *videoService) Delete(video models.Video) {
-	service.videoRepository.Save(video)
+	service.videoRepository.Delete(video)
 }
 
 func (service *videoService) FindAll() []models.Video {

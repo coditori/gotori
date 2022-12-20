@@ -37,6 +37,8 @@ func NewRouter() *gin.Engine {
 		auth.GET("/refresh_token", authMiddleware.RefreshHandler)
 		auth.GET("/hello", helloHandler)
 		auth.GET("/videos", videoController.FindAll)
+		auth.PUT("/videos/:id", videoController.Update)
+		auth.DELETE("/videos/:id", videoController.Delete)
 		auth.POST("/videos", videoController.Save)
 	}
 
