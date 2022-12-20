@@ -4,18 +4,21 @@ import (
 	"io"
 	"os"
 	"rest/controller"
+	"rest/repository"
 	"rest/service"
 
 	"github.com/gin-gonic/gin"
 )
 
 var (
-	videoService    service.VideoService       = service.New()
+	videoRepository repository.VideoRepository = repository.New()
+	videoService    service.VideoService       = service.New(videoRepository)
 	videoController controller.VideoController = controller.New(videoService)
 )
 
 func Init() {
 	// config := config.GetConfig()
+	defer videoRepository.CLoseDB()
 	saveLogToFile()
 	router := NewRouter()
 	port := getApplicationPort()

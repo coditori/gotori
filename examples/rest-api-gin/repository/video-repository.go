@@ -19,7 +19,7 @@ type database struct {
 	connection *gorm.DB
 }
 
-func NewRepository() VideoRepository {
+func New() VideoRepository {
 	db, err := gorm.Open(sqlite.Open("file::memory:?cache=shared"), &gorm.Config{})
 	if err != nil {
 		panic("Failed to connect database")
