@@ -1,0 +1,195 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "A book management service API in Go using Gin framework.",
+        "title": "Gin Book Service",
+        "termsOfService": "https://tos.santoshk.dev",
+        "contact": {
+            "name": "Santosh Kumar",
+            "url": "https://twitter.com/sntshk",
+            "email": "sntshkmr60@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:8000",
+    "basePath": "/auth",
+    "paths": {
+        "/auth/videos": {
+            "get": {
+                "description": "Takes nothing. Return list of videos.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "videos"
+                ],
+                "summary": "Return all videos",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Video"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Takes a video JSON and save it in DB. Return saved JSON.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "videos"
+                ],
+                "summary": "Save a new video",
+                "parameters": [
+                    {
+                        "description": "Video JSON",
+                        "name": "video",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Video"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Video"
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/videos/{id}": {
+            "put": {
+                "description": "Takes a video JSON and video id and update it in DB. Return saved JSON.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "videos"
+                ],
+                "summary": "Update an existing video",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "VideoId",
+                        "name": "uint",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Video JSON",
+                        "name": "video",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Video"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Video"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Takes a video id and detele it in DB. Return nothing.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "videos"
+                ],
+                "summary": "Delete an existing video",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "VideoId",
+                        "name": "uint",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Video"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.Person": {
+            "type": "object",
+            "required": [
+                "email",
+                "firstname",
+                "lastname"
+            ],
+            "properties": {
+                "age": {
+                    "type": "integer",
+                    "maximum": 130,
+                    "minimum": 1
+                },
+                "email": {
+                    "type": "string"
+                },
+                "firstname": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "lastname": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.Video": {
+            "type": "object",
+            "required": [
+                "author",
+                "url"
+            ],
+            "properties": {
+                "author": {
+                    "$ref": "#/definitions/models.Person"
+                },
+                "description": {
+                    "type": "string",
+                    "maxLength": 200
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "title": {
+                    "type": "string",
+                    "maxLength": 100,
+                    "minLength": 2
+                },
+                "url": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

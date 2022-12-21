@@ -7,6 +7,8 @@ import (
 
 	jwt "github.com/appleboy/gin-jwt/v2"
 	"github.com/gin-gonic/gin"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 var identityKey = "id"
@@ -21,6 +23,7 @@ func NewRouter() *gin.Engine {
 			"messsage": "pong!",
 		})
 	})
+	router.GET("/docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	authMiddleware := middlewares.JwtAuth()
 
