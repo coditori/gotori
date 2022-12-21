@@ -20,7 +20,7 @@ type database struct {
 }
 
 func New() VideoRepository {
-	db, err := gorm.Open(sqlite.Open("file::memory:?cache=shared"), &gorm.Config{})
+	db, err := gorm.Open(sqlite.Open("test.db"), &gorm.Config{})
 	if err != nil {
 		panic("Failed to connect database")
 	}
@@ -52,6 +52,6 @@ func (db *database) Delete(video models.Video) {
 
 func (db *database) FindAll() []models.Video {
 	var videos []models.Video
-	db.connection.Set("gorm:auto_preload", true).Find(&videos)
+	db.connection.Preload("Author").Find(&videos)
 	return videos
 }
