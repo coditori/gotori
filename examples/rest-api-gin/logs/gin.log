@@ -2,9 +2,9 @@
  - using env:	export GIN_MODE=release
  - using code:	gin.SetMode(gin.ReleaseMode)
 
-[GIN-debug] GET    /ping                     --> rest/server.NewRouter.func1 (1 handlers)
+[GIN-debug] GET    /ping                     --> rest/server.pingHandler (1 handlers)
 [GIN-debug] GET    /docs/*any                --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (1 handlers)
-[GIN-debug] POST   /login                    --> github.com/appleboy/gin-jwt/v2.(*GinJWTMiddleware).LoginHandler-fm (1 handlers)
+[GIN-debug] POST   /login                    --> rest/server.loginHandler (1 handlers)
 [GIN-debug] GET    /auth/refresh_token       --> github.com/appleboy/gin-jwt/v2.(*GinJWTMiddleware).RefreshHandler-fm (2 handlers)
 [GIN-debug] GET    /auth/hello               --> rest/server.helloHandler (2 handlers)
 [GIN-debug] GET    /auth/videos              --> rest/controller.VideoController.FindAll-fm (2 handlers)

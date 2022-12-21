@@ -53,6 +53,7 @@ func validateRequestAndShowErrorIfCouldNotValidate(ctx *gin.Context, video *mode
 // @Param        video  body      models.Video  true  "Video JSON"
 // @Success      200    {object}  models.Video
 // @Router       /auth/videos [post]
+// @Security     JWT
 func (controller *videoController) Save(ctx *gin.Context) {
 	var video models.Video
 	validateRequestAndShowErrorIfCouldNotValidate(ctx, &video)
@@ -107,6 +108,7 @@ func (controller *videoController) Delete(ctx *gin.Context) {
 // @Produce      json
 // @Success      200    {array}  models.Video
 // @Router       /auth/videos [get]
+// @Security     JWT
 func (controller *videoController) FindAll(ctx *gin.Context) {
 	ctx.JSON(200, controller.service.FindAll())
 }

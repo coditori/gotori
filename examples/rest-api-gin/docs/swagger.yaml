@@ -1,5 +1,15 @@
-basePath: /auth
+basePath: /
 definitions:
+  models.LoginRequest:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    required:
+    - password
+    - username
+    type: object
   models.Person:
     properties:
       age:
@@ -64,6 +74,8 @@ paths:
             items:
               $ref: '#/definitions/models.Video'
             type: array
+      security:
+      - JWT: []
       summary: Return all videos
       tags:
       - videos
@@ -83,6 +95,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Video'
+      security:
+      - JWT: []
       summary: Save a new video
       tags:
       - videos
@@ -130,4 +144,42 @@ paths:
       summary: Update an existing video
       tags:
       - videos
+  /login:
+    post:
+      description: Takes nothing. Return list of videos.
+      parameters:
+      - description: Login JSON
+        in: body
+        name: login
+        required: true
+        schema:
+          $ref: '#/definitions/models.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+      summary: Login by username and password
+      tags:
+      - login
+  /ping:
+    get:
+      description: Return poing if server is fine.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+      summary: Ping the API
+      tags:
+      - ping
+securityDefinitions:
+  JWT:
+    in: header
+    name: Authorization
+    type: apiKey
 swagger: "2.0"
