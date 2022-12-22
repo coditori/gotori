@@ -3,8 +3,7 @@ Here I used below technologies
 - Gin framework
 - Swagger (Swaggo)
 - SQLite
-- Gomega
-- Ginkgo
+- Testify
 
 ## How to run
 Before running you can download dependencies by:
