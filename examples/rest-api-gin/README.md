@@ -1,5 +1,5 @@
 # Golang Restful API implementation
-Here I used below technologies
+Here I used below technologies:
 - Gin framework
 - Swagger (Swaggo)
 - SQLite
@@ -20,4 +20,3 @@ Then simply run the application
 ```console
 foo@bar:~$ go run main.go
 ```
-
