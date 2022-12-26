@@ -20,3 +20,4 @@ Then simply run the application
 ```console
 foo@bar:~$ go run main.go
 ```
+
