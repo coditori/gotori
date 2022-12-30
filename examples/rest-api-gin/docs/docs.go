@@ -10,11 +10,9 @@ const docTemplate = `{
     "info": {
         "description": "{{escape .Description}}",
         "title": "{{.Title}}",
-        "termsOfService": "https://tos.santoshk.dev",
+        "termsOfService": "https://github.com/coditori/javatori/blob/master/LICENSE",
         "contact": {
-            "name": "Santosh Kumar",
-            "url": "https://twitter.com/sntshk",
-            "email": "sntshkmr60@gmail.com"
+            "name": "Ario Afrashteh"
         },
         "license": {
             "name": "Apache 2.0",
@@ -88,7 +86,44 @@ const docTemplate = `{
             }
         },
         "/auth/videos/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "description": "Takes a video id and return it from DB.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "videos"
+                ],
+                "summary": "Find an existing video",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "VideoId",
+                        "name": "uint",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Video"
+                        }
+                    }
+                }
+            },
             "put": {
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
                 "description": "Takes a video JSON and video id and update it in DB. Return saved JSON.",
                 "produces": [
                     "application/json"
@@ -125,6 +160,11 @@ const docTemplate = `{
                 }
             },
             "delete": {
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
                 "description": "Takes a video id and detele it in DB. Return nothing.",
                 "produces": [
                     "application/json"

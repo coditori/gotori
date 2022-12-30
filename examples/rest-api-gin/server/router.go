@@ -3,7 +3,6 @@ package server
 import (
 	"log"
 	"rest/middlewares"
-	"rest/models"
 
 	jwt "github.com/appleboy/gin-jwt/v2"
 	"github.com/gin-gonic/gin"
@@ -17,6 +16,7 @@ var authMiddleware *jwt.GinJWTMiddleware = middlewares.JwtAuth()
 func NewRouter() *gin.Engine {
 	router := gin.New()
 
+	router.Use(middlewares.CORSMiddleware())
 	// router.Use(gin.Recovery(), middlewares.Logger(), gindump.Dump())
 
 	router.GET("/ping", pingHandler)
@@ -32,24 +32,14 @@ func NewRouter() *gin.Engine {
 	auth := router.Group("/auth", authMiddleware.MiddlewareFunc())
 	{
 		auth.GET("/refresh_token", authMiddleware.RefreshHandler)
-		auth.GET("/hello", helloHandler)
+		auth.POST("/videos", videoController.Save)
 		auth.GET("/videos", videoController.FindAll)
+		auth.GET("/videos/:id", videoController.FindById)
 		auth.PUT("/videos/:id", videoController.Update)
 		auth.DELETE("/videos/:id", videoController.Delete)
-		auth.POST("/videos", videoController.Save)
 	}
 
 	return router
-}
-
-func helloHandler(c *gin.Context) {
-	claims := jwt.ExtractClaims(c)
-	user, _ := c.Get(identityKey)
-	c.JSON(200, gin.H{
-		"userID":   claims[identityKey],
-		"userName": user.(*models.User).UserName,
-		"text":     "Hello World.",
-	})
 }
 
 // GetPing     godoc

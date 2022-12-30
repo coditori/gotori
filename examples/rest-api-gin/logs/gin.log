@@ -2,15 +2,16 @@
  - using env:	export GIN_MODE=release
  - using code:	gin.SetMode(gin.ReleaseMode)
 
-[GIN-debug] GET    /ping                     --> rest/server.pingHandler (1 handlers)
-[GIN-debug] GET    /docs/*any                --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (1 handlers)
-[GIN-debug] POST   /login                    --> rest/server.loginHandler (1 handlers)
-[GIN-debug] GET    /auth/refresh_token       --> github.com/appleboy/gin-jwt/v2.(*GinJWTMiddleware).RefreshHandler-fm (2 handlers)
-[GIN-debug] GET    /auth/hello               --> rest/server.helloHandler (2 handlers)
-[GIN-debug] GET    /auth/videos              --> rest/controller.VideoController.FindAll-fm (2 handlers)
-[GIN-debug] PUT    /auth/videos/:id          --> rest/controller.VideoController.Update-fm (2 handlers)
-[GIN-debug] DELETE /auth/videos/:id          --> rest/controller.VideoController.Delete-fm (2 handlers)
-[GIN-debug] POST   /auth/videos              --> rest/controller.VideoController.Save-fm (2 handlers)
+[GIN-debug] GET    /ping                     --> rest/server.pingHandler (2 handlers)
+[GIN-debug] GET    /docs/*any                --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (2 handlers)
+[GIN-debug] POST   /login                    --> rest/server.loginHandler (2 handlers)
+[GIN-debug] GET    /auth/refresh_token       --> github.com/appleboy/gin-jwt/v2.(*GinJWTMiddleware).RefreshHandler-fm (3 handlers)
+[GIN-debug] POST   /auth/videos              --> rest/controller.VideoController.Save-fm (3 handlers)
+[GIN-debug] GET    /auth/videos              --> rest/controller.VideoController.FindAll-fm (3 handlers)
+[GIN-debug] GET    /auth/videos/:id          --> rest/controller.VideoController.FindById-fm (3 handlers)
+[GIN-debug] PUT    /auth/videos/:id          --> rest/controller.VideoController.Update-fm (3 handlers)
+[GIN-debug] DELETE /auth/videos/:id          --> rest/controller.VideoController.Delete-fm (3 handlers)
 [GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
 Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
 [GIN-debug] Listening and serving HTTP on :8000
+[GIN-debug] [WARNING] Headers were already written. Wanted to override status code 400 with 200

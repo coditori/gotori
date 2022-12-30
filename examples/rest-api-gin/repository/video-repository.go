@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"log"
 	"rest/models"
 
 	"gorm.io/driver/sqlite" // Sqlite driver based on GGO
@@ -11,6 +12,7 @@ type VideoRepository interface {
 	Save(video models.Video)
 	Update(video models.Video)
 	Delete(video models.Video)
+	FindById(video models.Video) models.Video
 	FindAll() []models.Video
 	CLoseDB()
 }
@@ -48,6 +50,13 @@ func (db *database) Update(video models.Video) {
 
 func (db *database) Delete(video models.Video) {
 	db.connection.Delete(&video)
+}
+
+func (db *database) FindById(video models.Video) models.Video {
+	var videoResult models.Video
+	db.connection.First(&videoResult)
+	log.Printf("%+v\n", videoResult)
+	return videoResult
 }
 
 func (db *database) FindAll() []models.Video {
