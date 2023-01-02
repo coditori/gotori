@@ -46,6 +46,14 @@ func validateRequestAndShowErrorIfCouldNotValidate(ctx *gin.Context, video *mode
 	}
 }
 
+func validateIdParamAndShowErrorIfCouldNotValidate(ctx *gin.Context) uint64 {
+	id, err := strconv.ParseUint(ctx.Param("id"), 0, 0)
+	if err != nil {
+		ctx.Writer.WriteHeader(404)
+	}
+	return id
+}
+
 // PostVideo     godoc
 // @Summary      Save a new video
 // @Description  Takes a video JSON and save it in DB. Return saved JSON.
@@ -128,16 +136,12 @@ func (controller *videoController) FindAll(ctx *gin.Context) {
 // @Router       /auth/videos/{id} [get]
 // @Security     JWT
 func (controller *videoController) FindById(ctx *gin.Context) {
-	id, err := strconv.ParseUint(ctx.Param("id"), 0, 0)
-	if err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{
-			"error": "Could not bind or validate data!",
-		})
-	}
-	log.Printf("id is %+v\n", id)
+	id := validateIdParamAndShowErrorIfCouldNotValidate(ctx)
 	video := controller.service.FindById(id)
+	log.Printf("Video id is %+v\n", id)
 	if video == (models.Video{}) {
 		ctx.Writer.WriteHeader(404)
+	} else {
+		ctx.JSON(http.StatusOK, video)
 	}
-	ctx.JSON(http.StatusOK, video)
 }

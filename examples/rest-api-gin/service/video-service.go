@@ -43,9 +43,7 @@ func (service *videoService) Delete(id uint64) (*models.Video, error) {
 }
 
 func (service *videoService) FindById(id uint64) models.Video {
-	var video models.Video
-	video.ID = id
-	return service.videoRepository.FindById(video)
+	return service.videoRepository.FindById(id)
 }
 
 func (service *videoService) FindAll() []models.Video {

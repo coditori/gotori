@@ -11,7 +11,7 @@ type VideoRepository interface {
 	Save(video models.Video)
 	Update(video models.Video)
 	Delete(video models.Video)
-	FindById(video models.Video) models.Video
+	FindById(id uint64) models.Video
 	FindAll() []models.Video
 	CLoseDB()
 }
@@ -51,9 +51,9 @@ func (db *database) Delete(video models.Video) {
 	db.connection.Delete(&video)
 }
 
-func (db *database) FindById(video models.Video) models.Video {
+func (db *database) FindById(id uint64) models.Video {
 	var videoResult models.Video
-	db.connection.First(&videoResult)
+	db.connection.First(&videoResult, id)
 	return videoResult
 }
 
