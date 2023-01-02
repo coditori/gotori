@@ -16,13 +16,13 @@ Here you can finnd below content:
 <td align="center">Standard Restful API using Gin, Swaggo, SQLite(in-memory), Testify</td>
 </tr>
 <tr>
+<td><a href="/examples/storage-service">Simple storage service</a></td>
+<td align="center">Upload/Donwload service with Basic auth</td>
+</tr>
+<tr>
+<tr>
 <td><a href="/tutorial">Go tutorial</a></td>
 <td align="center">Learn by example by uncommenting each part</td>
 </tr>
-<tr>
-<td><a href="/examples/storage-service">Simple storage (upload donwload service)</a></td>
-<td align="center">Basic auth can be configured</td>
-</tr>
-<tr>
 </tbody>
 </table>
