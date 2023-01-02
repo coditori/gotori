@@ -12,7 +12,7 @@ Here you can finnd below content:
 <td colspan="2"><strong>projects</strong></td>
 </tr>
 <tr>
-<td><a href="/examples/rest-api-gin/spring-boot-reactive-restful-nosql-mongodb">Rest API</a></td>
+<td><a href="/examples/rest-api-gin">Rest API</a></td>
 <td align="center">Standard Restful API using Gin, Swaggo, SQLite(in-memory), Testify</td>
 </tr>
 <tr>
