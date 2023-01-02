@@ -95,13 +95,15 @@ func (controller *videoController) Update(ctx *gin.Context) {
 // @Router       /auth/videos/{id} [delete]
 // @Security     JWT
 func (controller *videoController) Delete(ctx *gin.Context) {
-	var video models.Video
 	id, err := strconv.ParseUint(ctx.Params.ByName("id"), 0, 0)
 	if err != nil {
-		log.Println("Coud not parse param!")
+		ctx.Writer.WriteHeader(http.StatusBadRequest)
 	}
-	video.ID = id
-	controller.service.Delete(video)
+	_, err = controller.service.Delete(id)
+	if err != nil {
+		ctx.Writer.WriteHeader(http.StatusNotFound)
+	}
+	ctx.Writer.WriteHeader(http.StatusAccepted)
 }
 
 // GetVideo      godoc
@@ -113,9 +115,7 @@ func (controller *videoController) Delete(ctx *gin.Context) {
 // @Router       /auth/videos [get]
 // @Security     JWT
 func (controller *videoController) FindAll(ctx *gin.Context) {
-	println("inside find all")
-	log.Printf("find all")
-	ctx.JSON(200, controller.service.FindAll())
+	ctx.JSON(http.StatusOK, controller.service.FindAll())
 }
 
 // DeleteVideo   godoc
@@ -135,5 +135,9 @@ func (controller *videoController) FindById(ctx *gin.Context) {
 		})
 	}
 	log.Printf("id is %+v\n", id)
-	ctx.JSON(http.StatusOK, controller.service.FindById(id))
+	video := controller.service.FindById(id)
+	if video == (models.Video{}) {
+		ctx.Writer.WriteHeader(404)
+	}
+	ctx.JSON(http.StatusOK, video)
 }

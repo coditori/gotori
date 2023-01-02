@@ -1,7 +1,7 @@
 package service
 
 import (
-	"log"
+	"errors"
 	"rest/models"
 	"rest/repository"
 )
@@ -9,7 +9,7 @@ import (
 type VideoService interface {
 	Save(models.Video) models.Video
 	Update(models.Video)
-	Delete(models.Video)
+	Delete(id uint64) (*models.Video, error)
 	FindById(id uint64) models.Video
 	FindAll() []models.Video
 }
@@ -33,14 +33,18 @@ func (service *videoService) Update(video models.Video) {
 	service.videoRepository.Update(video)
 }
 
-func (service *videoService) Delete(video models.Video) {
+func (service *videoService) Delete(id uint64) (*models.Video, error) {
+	video := service.FindById(id)
+	if video == (models.Video{}) {
+		return nil, errors.New("could not find the resurce")
+	}
 	service.videoRepository.Delete(video)
+	return &video, nil
 }
 
 func (service *videoService) FindById(id uint64) models.Video {
 	var video models.Video
 	video.ID = id
-	log.Printf("FindById Video is %+v\n", &video)
 	return service.videoRepository.FindById(video)
 }
 
