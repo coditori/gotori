@@ -51,14 +51,12 @@ definitions:
 host: localhost:8000
 info:
   contact:
-    email: sntshkmr60@gmail.com
-    name: Santosh Kumar
-    url: https://twitter.com/sntshk
+    name: Ario Afrashteh
   description: A book management service API in Go using Gin framework.
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  termsOfService: https://tos.santoshk.dev
+  termsOfService: https://github.com/coditori/javatori/blob/master/LICENSE
   title: Gin Book Service
   version: "1.0"
 paths:
@@ -116,7 +114,29 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Video'
+      security:
+      - JWT: []
       summary: Delete an existing video
+      tags:
+      - videos
+    get:
+      description: Takes a video id and return it from DB.
+      parameters:
+      - description: VideoId
+        in: path
+        name: uint
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Video'
+      security:
+      - JWT: []
+      summary: Find an existing video
       tags:
       - videos
     put:
@@ -141,6 +161,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Video'
+      security:
+      - JWT: []
       summary: Update an existing video
       tags:
       - videos
