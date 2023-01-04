@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"errors"
 	"rest/models"
 
 	"gorm.io/driver/sqlite" // Sqlite driver based on GGO
@@ -8,8 +9,8 @@ import (
 )
 
 type VideoRepository interface {
-	Save(video models.Video)
-	Update(video models.Video)
+	Save(video models.Video) (*models.Video, error)
+	Update(video models.Video) models.Video
 	Delete(video models.Video)
 	FindById(id uint64) models.Video
 	FindAll() []models.Video
@@ -39,12 +40,17 @@ func (db *database) CLoseDB() {
 	myDb.Close()
 }
 
-func (db *database) Save(video models.Video) {
-	db.connection.Create(&video)
+func (db *database) Save(video models.Video) (*models.Video, error) {
+	tx := db.connection.Create(&video)
+	if tx.Error != nil {
+		return nil, errors.New("could not create the resurce")
+	}
+	return &video, nil
 }
 
-func (db *database) Update(video models.Video) {
+func (db *database) Update(video models.Video) models.Video {
 	db.connection.Save(&video)
+	return video
 }
 
 func (db *database) Delete(video models.Video) {
