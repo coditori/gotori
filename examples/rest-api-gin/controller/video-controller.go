@@ -48,7 +48,7 @@ func validateRequestAndShowErrorIfCouldNotValidate(ctx *gin.Context, video *mode
 
 func validateIdParamAndShowErrorIfCouldNotValidate(ctx *gin.Context) uint64 {
 	id, err := strconv.ParseUint(ctx.Param("id"), 0, 0)
-	if err != nil || id == 0 {
+	if err != nil || id < 1 {
 		ctx.Writer.WriteHeader(http.StatusBadRequest)
 		return 0
 	}
@@ -88,7 +88,6 @@ func (controller *videoController) Save(ctx *gin.Context) {
 func (controller *videoController) Update(ctx *gin.Context) {
 	var video models.Video
 	validateRequestAndShowErrorIfCouldNotValidate(ctx, &video)
-
 	id, err := strconv.ParseUint(ctx.Params.ByName("id"), 0, 0)
 	if err != nil {
 		log.Println("Coud not parse param!")
