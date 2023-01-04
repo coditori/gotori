@@ -20,3 +20,8 @@ Then simply run the application
 ```console
 foo@bar:~$ go run main.go
 ```
+
+## How to test
+```console
+go test ./...
+```

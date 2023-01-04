@@ -7,8 +7,8 @@ import (
 )
 
 type VideoService interface {
-	Save(models.Video) models.Video
-	Update(models.Video)
+	Save(models.Video) (*models.Response, error)
+	Update(models.Video) models.Response
 	Delete(id uint64) (*models.Video, error)
 	FindById(id uint64) models.Video
 	FindAll() []models.Video
@@ -24,13 +24,16 @@ func New(repo repository.VideoRepository) VideoService {
 	}
 }
 
-func (service *videoService) Save(video models.Video) models.Video {
-	service.videoRepository.Save(video)
-	return video
+func (service *videoService) Save(video models.Video) (*models.Response, error) {
+	savdVideo, err := service.videoRepository.Save(video)
+	if err != nil {
+		return nil, err
+	}
+	return &models.Response{ID: savdVideo.ID}, nil
 }
 
-func (service *videoService) Update(video models.Video) {
-	service.videoRepository.Update(video)
+func (service *videoService) Update(video models.Video) models.Response {
+	return models.Response{ID: service.videoRepository.Update(video).ID}
 }
 
 func (service *videoService) Delete(id uint64) (*models.Video, error) {
@@ -43,9 +46,7 @@ func (service *videoService) Delete(id uint64) (*models.Video, error) {
 }
 
 func (service *videoService) FindById(id uint64) models.Video {
-	var video models.Video
-	video.ID = id
-	return service.videoRepository.FindById(video)
+	return service.videoRepository.FindById(id)
 }
 
 func (service *videoService) FindAll() []models.Video {

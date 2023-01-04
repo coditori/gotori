@@ -46,6 +46,15 @@ func validateRequestAndShowErrorIfCouldNotValidate(ctx *gin.Context, video *mode
 	}
 }
 
+func validateIdParamAndShowErrorIfCouldNotValidate(ctx *gin.Context) uint64 {
+	id, err := strconv.ParseUint(ctx.Param("id"), 0, 0)
+	if err != nil || id < 1 {
+		ctx.Writer.WriteHeader(http.StatusBadRequest)
+		return 0
+	}
+	return id
+}
+
 // PostVideo     godoc
 // @Summary      Save a new video
 // @Description  Takes a video JSON and save it in DB. Return saved JSON.
@@ -58,9 +67,12 @@ func validateRequestAndShowErrorIfCouldNotValidate(ctx *gin.Context, video *mode
 func (controller *videoController) Save(ctx *gin.Context) {
 	var video models.Video
 	validateRequestAndShowErrorIfCouldNotValidate(ctx, &video)
-	// log.Printf("Video is %s /n", video)
-	controller.service.Save(video)
-	ctx.JSON(http.StatusOK, video)
+	savedVideoResponse, err := controller.service.Save(video)
+	if err != nil {
+		ctx.Writer.WriteHeader(http.StatusBadRequest)
+	} else {
+		ctx.JSON(http.StatusCreated, savedVideoResponse)
+	}
 }
 
 // PutVideo      godoc
@@ -76,7 +88,6 @@ func (controller *videoController) Save(ctx *gin.Context) {
 func (controller *videoController) Update(ctx *gin.Context) {
 	var video models.Video
 	validateRequestAndShowErrorIfCouldNotValidate(ctx, &video)
-
 	id, err := strconv.ParseUint(ctx.Params.ByName("id"), 0, 0)
 	if err != nil {
 		log.Println("Coud not parse param!")
@@ -120,7 +131,7 @@ func (controller *videoController) FindAll(ctx *gin.Context) {
 
 // DeleteVideo   godoc
 // @Summary      Find an existing video
-// @Description  Takes a video id and return it from DB.
+// @Description  Takes a video id and return it from DB. If the request is not correct will return 400, and 404 if could not find the resource otherwise return 200.
 // @Tags         videos
 // @Produce      json
 // @Param        uint   path      uint        true  "VideoId"
@@ -128,16 +139,14 @@ func (controller *videoController) FindAll(ctx *gin.Context) {
 // @Router       /auth/videos/{id} [get]
 // @Security     JWT
 func (controller *videoController) FindById(ctx *gin.Context) {
-	id, err := strconv.ParseUint(ctx.Param("id"), 0, 0)
-	if err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{
-			"error": "Could not bind or validate data!",
-		})
-	}
-	log.Printf("id is %+v\n", id)
+	id := validateIdParamAndShowErrorIfCouldNotValidate(ctx)
+	log.Printf("video id is %+v\n", id)
+	log.Printf("Called after error\n")
 	video := controller.service.FindById(id)
-	if video == (models.Video{}) {
-		ctx.Writer.WriteHeader(404)
+	if video == (models.Video{}) || id == 0 {
+		ctx.Writer.WriteHeader(http.StatusNotFound)
+	} else {
+		ctx.JSON(http.StatusOK, video)
 	}
-	ctx.JSON(http.StatusOK, video)
+	log.Printf("Called at the end\n")
 }
