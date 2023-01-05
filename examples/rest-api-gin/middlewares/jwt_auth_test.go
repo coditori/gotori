@@ -16,16 +16,13 @@ func TestGivenCorrectRequest_WhenUserIsNotLoggedIn_ThenLoginWillSucceed(t *testi
 		"password": "admin"
 	}`)
 
-	res, err1 := util.HttpCall("POST", "http://localhost:8000/login", url.Values{}, payload)
-
+	res, err1 := util.HttpCall("POST", util.BaseUrl+"/login", url.Values{}, payload, "")
 	assert.Equal(t, err1, nil)
 	assert.Equal(t, res.StatusCode, http.StatusOK)
 
 	mappedResponse, err2 := util.ParseHttpResponseToMap(res)
-
 	assert.Equal(t, err2, nil)
-	assert.NotEmpty(t, mappedResponse)
-	util.AccessToken = mappedResponse["token"]
+	assert.NotEmpty(t, mappedResponse["token"])
 }
 
 func TestGivenWronogRequest_WhenUserIsNotLoggedIn_ThenLoginWillFail(t *testing.T) {
@@ -34,7 +31,7 @@ func TestGivenWronogRequest_WhenUserIsNotLoggedIn_ThenLoginWillFail(t *testing.T
 		"password": ""
 	}`)
 
-	res, err1 := util.HttpCall("POST", "http://localhost:8000/login", url.Values{}, payload)
+	res, err1 := util.HttpCall("POST", util.BaseUrl+"/login", url.Values{}, payload, "")
 
 	assert.Equal(t, err1, nil)
 	assert.Equal(t, res.StatusCode, http.StatusUnauthorized)

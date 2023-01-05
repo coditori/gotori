@@ -46,13 +46,8 @@ func validateRequestAndShowErrorIfCouldNotValidate(ctx *gin.Context, video *mode
 	}
 }
 
-func validateIdParamAndShowErrorIfCouldNotValidate(ctx *gin.Context) uint64 {
-	id, err := strconv.ParseUint(ctx.Param("id"), 0, 0)
-	if err != nil || id < 1 {
-		ctx.Writer.WriteHeader(http.StatusBadRequest)
-		return 0
-	}
-	return id
+func validateIdParamAndShowErrorIfCouldNotValidate(ctx *gin.Context) (uint64, error) {
+	return strconv.ParseUint(ctx.Param("id"), 0, 0)
 }
 
 // PostVideo     godoc
@@ -109,11 +104,14 @@ func (controller *videoController) Delete(ctx *gin.Context) {
 	id, err := strconv.ParseUint(ctx.Params.ByName("id"), 0, 0)
 	if err != nil {
 		ctx.Writer.WriteHeader(http.StatusBadRequest)
+		return
 	}
 	_, err = controller.service.Delete(id)
 	if err != nil {
 		ctx.Writer.WriteHeader(http.StatusNotFound)
+		return
 	}
+
 	ctx.Writer.WriteHeader(http.StatusAccepted)
 }
 
@@ -139,14 +137,17 @@ func (controller *videoController) FindAll(ctx *gin.Context) {
 // @Router       /auth/videos/{id} [get]
 // @Security     JWT
 func (controller *videoController) FindById(ctx *gin.Context) {
-	id := validateIdParamAndShowErrorIfCouldNotValidate(ctx)
-	log.Printf("video id is %+v\n", id)
-	log.Printf("Called after error\n")
+	id, err := validateIdParamAndShowErrorIfCouldNotValidate(ctx)
+	if err != nil || id < 1 {
+		ctx.Writer.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
 	video := controller.service.FindById(id)
 	if video == (models.Video{}) || id == 0 {
 		ctx.Writer.WriteHeader(http.StatusNotFound)
-	} else {
-		ctx.JSON(http.StatusOK, video)
+		return
 	}
-	log.Printf("Called at the end\n")
+
+	ctx.JSON(http.StatusOK, video)
 }
