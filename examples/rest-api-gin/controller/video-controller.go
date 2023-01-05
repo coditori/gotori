@@ -104,13 +104,15 @@ func (controller *videoController) Delete(ctx *gin.Context) {
 	id, err := strconv.ParseUint(ctx.Params.ByName("id"), 0, 0)
 	if err != nil {
 		ctx.Writer.WriteHeader(http.StatusBadRequest)
+		return
 	}
 	_, err = controller.service.Delete(id)
 	if err != nil {
 		ctx.Writer.WriteHeader(http.StatusNotFound)
-	} else {
-		ctx.Writer.WriteHeader(http.StatusAccepted)
+		return
 	}
+
+	ctx.Writer.WriteHeader(http.StatusAccepted)
 }
 
 // GetVideo      godoc
@@ -136,12 +138,16 @@ func (controller *videoController) FindAll(ctx *gin.Context) {
 // @Security     JWT
 func (controller *videoController) FindById(ctx *gin.Context) {
 	id, err := validateIdParamAndShowErrorIfCouldNotValidate(ctx)
-	video := controller.service.FindById(id)
 	if err != nil || id < 1 {
 		ctx.Writer.WriteHeader(http.StatusBadRequest)
-	} else if video == (models.Video{}) || id == 0 {
-		ctx.Writer.WriteHeader(http.StatusNotFound)
-	} else {
-		ctx.JSON(http.StatusOK, video)
+		return
 	}
+
+	video := controller.service.FindById(id)
+	if video == (models.Video{}) || id == 0 {
+		ctx.Writer.WriteHeader(http.StatusNotFound)
+		return
+	}
+
+	ctx.JSON(http.StatusOK, video)
 }
