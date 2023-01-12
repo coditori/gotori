@@ -22,8 +22,7 @@ foo@bar:~$ go run main.go
 ```
 
 ## Default user info
-username/password: admin
-You can also login with this user once and enter the token inside swagger/postman then you have the access to all endpoints
+You can also login with this user once and enter the token inside swagger/postman then you have the access to all endpoints: username/password = admin
 
 ## Check if the API is running
 Check this on browser: http://localhost:8000/ping
