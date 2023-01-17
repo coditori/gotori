@@ -17,7 +17,7 @@ func Test_printSomething(t *testing.T) {
 	var wg sync.WaitGroup
 	wg.Add(1)
 
-    go printSomethingWithWaitGroup("epislon", &wg)
+    go printSomethingWithWaitGroup("epsilon", &wg)
 	wg.Wait()
 
     w.Close()
@@ -27,7 +27,7 @@ func Test_printSomething(t *testing.T) {
 
 	os.Stdout = stdout
 
-	if !strings.Contains(output, "epislon") {
+	if !strings.Contains(output, "epsilon") {
 		t.Errorf("Expected 'epislon' to be in the output")
 	}
 }
