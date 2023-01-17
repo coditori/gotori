@@ -10,6 +10,11 @@ Before running you can download dependencies by:
 ```console
 foo@bar:~$ go get .
 ```
+
+Install Swago
+oo@bar:~$ go install github.com/swaggo/swag/cmd/swag@latest
+```
+
 Then generate swagger docs by
 
 ```console
